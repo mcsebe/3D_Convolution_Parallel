@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
     cudaMalloc((void**)&deviceFilter, filterDeviceSize);
 
     // Configurar las dimensiones del bloque y de la cuadrícula
-    dim3 blockDim(10, 10, 10);
+    dim3 blockDim(64, 4, 4);
     dim3 gridDim((size + blockDim.x - 1) / blockDim.x,
                  (size + blockDim.y - 1) / blockDim.y,
                  (size + blockDim.z - 1) / blockDim.z);
@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
     cudaMemcpy(hostMatrix, deviceMatrix, matrixSize, cudaMemcpyDeviceToHost);
 
     // Imprimir la matriz
-    if (size < 33) {
+    if (size < 3) {
         printMatrix(hostMatrix, size);
     }
 
@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
     cudaMemcpy(hostFilter, deviceFilter, filterDeviceSize, cudaMemcpyDeviceToHost);
 
     // Imprimir el filtro
-    if (m < 33 && size < 33){
+    if (m < 33 && size < 3){
         printMatrix(hostFilter, m);
     }    
     
@@ -203,7 +203,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Imprimir el resultado
-    if (size < 1000) {
+    if (size < 3) {
         printf("Convolucion:\n");
         printMatrix(hostResult, size);
     }
